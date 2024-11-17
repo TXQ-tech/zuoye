@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Component</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+    <div id="id-div-comp">
+        <comp-title></comp-title>
+        <comp-content></comp-content>
+        <comp-counter></comp-counter>
+    </div>
+
+    <script>
+        // Vue Global Component - title
+        Vue.component('comp-title', {
+            template: '<h3>Title - Vue.js Global Component</h3>'
+        });
+
+        // Vue Global Component - content
+        Vue.component('comp-content', {
+            template: '<p>This is a Vue.js component paragraph.</p>'
+        });
+
+        // Vue Global Component - button
+        Vue.component('comp-counter', {
+            data: function() {
+                return {
+                    count: 0
+                }
+            },
+            template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+        });
+
+        // Vue Entry
+        var vm = new Vue({
+            el: '#id-div-comp'
+        });
+    </script>
+</body>
+</html>
