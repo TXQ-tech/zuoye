@@ -1,43 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue.js Component</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Router Example</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-router@3.5.2/dist/vue-router.js"></script>
 </head>
-<body>
-    <div id="id-div-comp">
-        <comp-title></comp-title>
-        <comp-content></comp-content>
-        <comp-counter></comp-counter>
-    </div>
+<div id="id-div-vue-router">
+  <h1>Vue.js Router</h1>
+  <p>
+    <!-- 使用 router-link 组件来导航 -->
+    <router-link to="/home" active-class="active">Home</router-link>
+    <router-link to="/news" active-class="active">News</router-link>
+    <router-link to="/about" active-class="active">About</router-link>
+  </p>
+  <!-- 路由出口 -->
+  <router-view></router-view>
+</div>
 
-    <script>
-        // Vue Global Component - title
-        Vue.component('comp-title', {
-            template: '<h3>Title - Vue.js Global Component</h3>'
-        });
+<script>
+  // 路由组件
+  const Home = {
+    template: '<div>This is home page.</div>'
+  };
+  const News = {
+    template: '<div>This is news page.</div>'
+  };
+  const About = {
+    template: '<div>About us.</div>'
+  };
 
-        // Vue Global Component - content
-        Vue.component('comp-content', {
-            template: '<p>This is a Vue.js component paragraph.</p>'
-        });
+  // 定义路由配置
+  const routes = [
+    {
+      path: '/home',
+      component: Home
+    },
+    {
+      path: '/news',
+      component: News
+    },
+    {
+      path: '/about',
+      component: About
+    },
+    {
+      path: '*',
+      redirect: '/home'
+    }
+  ];
 
-        // Vue Global Component - button
-        Vue.component('comp-counter', {
-            data: function() {
-                return {
-                    count: 0
-                }
-            },
-            template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
-        });
+  // 创建 router 实例
+  const router = new VueRouter({
+    routes: routes
+  });
 
-        // Vue Entry
-        var vm = new Vue({
-            el: '#id-div-comp'
-        });
-    </script>
+  // Vue 实例
+  const app = new Vue({
+    router
+  }).$mount('#id-div-vue-router');
+</script>
 </body>
 </html>
